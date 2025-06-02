@@ -22,19 +22,30 @@
         <h3 class="sidebar-title">Acesso ao Portal</h3>
     </a>
 
+    <!-- Listão de aprovados -->
+    <a href="{% url "instsoli:listao_aprovados" %}" class="sidebar-link">
+        <i class='bx bx-list-check'></i>
+        <h3 class="sidebar-title">Listão dos Aprovados</h3>
+    </a>
+
     <!-- Solicitações -->
     <a href="{% if user.is_superuser %}{% url 'instsoli:professor_solicitacoes' %}{% else %}{% url 'instsoli:listar_solicitacoes' %}{% endif %}" class="sidebar-link">
         <i class='bx bx-pencil'></i>
         <h3 class="sidebar-title">Solicitações</h3>
     </a>
 
+    <!-- Listão de aprovados -->
+    <a href="#" class="sidebar-link">
+        <i class='bx bxs-group' ></i>
+        <h3 class="sidebar-title">Quem somos</h3>
+    </a>
 
     <!-- Listão de aprovados -->
-    <a href="{% url "instsoli:listao_aprovados" %}" class="sidebar-link">
-        <i class='bx bx-list-check'></i>
-        <h3 class="sidebar-title">Listão dos Aprovados</h3>
+    <a href="#" class="sidebar-link">
+        <i class='bx bx-cog'></i>
+        <h3 class="sidebar-title">Ajustes</h3>
     </a>
-    
+
     {% if user.is_authenticated %}
     <!-- Logout -->
     <a href="{% url "usuario:logout" %}" class="sidebar-link">
