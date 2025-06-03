@@ -66,23 +66,59 @@
 
     .search {
         margin-left: auto;
-        display: flex;
-        align-items: center;
-        background: #f1f1f1;
-        padding: 6px 10px;
-        border-radius: 8px;
+        position: relative;
+        width: 300px;
     }
 
     .search input {
-        border: none;
-        background: transparent;
-        outline: none;
-        padding: 4px 8px;
+        width: 100%;
+        padding: 10px 16px 10px 40px;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        background-color: #f8fafc;
+        color: #334155;
     }
 
     .search i {
-        color: #888;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-100%);
+        color: #94a3b8;
         font-size: 18px;
+        pointer-events: none; /* Isso garante que cliques no ícone passem para o input */
+    }
+
+    .search input:focus {
+        outline: none;
+        border-color: #2E5F3E;
+        background-color: white;
+        box-shadow: 0 0 0 3px rgba(46, 95, 62, 0.1);
+    }
+
+    .search input::placeholder {
+        color: #94a3b8;
+    }
+
+    .search button {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        color: #94a3b8;
+        cursor: pointer;
+    }
+
+    .search button i {
+        font-size: 18px;
+    }
+
+    .search button:hover i {
+        color: #2E5F3E;
     }
 
     .avisos-list {
@@ -237,14 +273,17 @@
     .modal-content button:hover {
         background-color: #254d32;
     }
+
+    main-content{
+        backgroud-color: white;
+    }
 </style>
 <body>
     {% include "instsoli/partials/sidebar.html" %}
 
-    <main>
+    <main class="main-content">
         <div class="header">
             <h1>Avisos</h1>
-            
         </div>
         <div class="actions">
             {% if user.is_superuser %}
@@ -253,10 +292,14 @@
             <h3 style="color:rgb(41, 82, 55)">Ultimos avisos...</h3>
             {% endif %}
 
-            <div class="search">
-                <input type="text" placeholder="Busca">
+            <form method="get" class="search">
                 <i class='bx bx-search'></i>
-            </div>
+                <input 
+                    type="text" 
+                    name="busca" 
+                    placeholder="Buscar avisos..."
+                    value="{{ busca }}">
+            </form>
         </div>
 
         <div class="avisos-list">
