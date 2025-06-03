@@ -68,7 +68,15 @@ describe('aba de aviso', () => {
     });
 
     it('adicionar aviso', () => {
-        
+        cy.createSuperUser('usuarioteste', 'usuarioteste@gmail.com', '123', '123', 'Gestor',      'instituto-solidare');
+        cy.login('usuarioteste', '123');
+        cy.get('[href="/portal_professor/"]').click();
+        cy.get(':nth-child(4) > a').click();
+        cy.get('#openModal').click();
+        cy.get('#titulo').type('Aviso teste');
+        cy.get('#mensagem').type('Esse aviso é um teste');
+        cy.get('#prioridade').select('Importante');
+        cy.get('form > button').click();
     });
 
     it('editar aviso', () => {

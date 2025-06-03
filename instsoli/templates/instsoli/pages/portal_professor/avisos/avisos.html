@@ -243,8 +243,8 @@
 
     <main>
         <div class="header">
-            <a href="#" class="back"><i class='bx bx-chevron-left'></i> Voltar</a>
             <h1>Avisos</h1>
+            
         </div>
 
         <div class="actions">
@@ -259,11 +259,11 @@
         <div class="avisos-list">
             {% for aviso in avisos %}
             <div class="aviso-item">
-                <div class="checkbox">
-                    <input type="checkbox" name="aviso_{{ aviso.id }}">
-                </div>
                 <div class="aviso-content">
                     <span class="autor">
+                        {% if user.is_superuser %}
+                        <a href="#"><i class="bx bx-x"></i></a>
+                        {% endif %}
                         {{ aviso.professor.get_full_name|default:aviso.professor.username }}
                         {% if aviso.prioridade == 'importante' %}
                             <span class="prioridade prioridade-importante">Importante</span>
