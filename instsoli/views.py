@@ -214,7 +214,6 @@ def registrar_frequencia(request, id):
     })
 
 # avisos professor
-@user_passes_test(is_admin, login_url='instsoli:home')
 @login_required(login_url='usuario:login')
 def avisos_list(request):
     avisos = Aviso.objects.all().order_by('-data_criacao')
@@ -222,8 +221,6 @@ def avisos_list(request):
         'avisos': avisos
     })
 
-
-@user_passes_test(is_admin, login_url='instsoli:home')
 @login_required(login_url='usuario:login')
 def criar_aviso(request):
     if request.method == 'POST':
@@ -240,7 +237,26 @@ def criar_aviso(request):
         return redirect('instsoli:avisos')
     return redirect('instsoli:avisos')
 
+def editar_aviso(request, id):
+    aviso = get_object_or_404(Aviso, id=id)
 
+    if request.method == 'POST':
+        aviso.titulo = request.POST.get('titulo')
+        aviso.mensagem = request.POST.get('mensagem')
+        aviso.prioridade = request.POST.get('prioridade')
+        aviso.save()
+
+        return redirect('instsoli:avisos')
+
+    return redirect('instsoli:avisos')
+
+def excluir_aviso(request, aviso_id):
+    aviso = get_object_or_404(Aviso, id=aviso_id)
+
+    if request.user == aviso.professor or request.user.is_superuser:
+        aviso.delete()
+
+    return redirect('instsoli:avisos')
 
 
 

@@ -246,9 +246,12 @@
             <h1>Avisos</h1>
             
         </div>
-
         <div class="actions">
+            {% if user.is_superuser %}
             <button id="openModal" class="primary">+ Novo Aviso</button>
+            {% else %}
+            <h3 style="color:rgb(41, 82, 55)">Ultimos avisos...</h3>
+            {% endif %}
 
             <div class="search">
                 <input type="text" placeholder="Busca">
@@ -261,8 +264,9 @@
             <div class="aviso-item">
                 <div class="aviso-content">
                     <span class="autor">
-                        {% if user.is_superuser %}
-                        <a href="#"><i class="bx bx-x"></i></a>
+                        {% if user.is_superuser or aviso.professor == user %}
+                            <a href="{% url 'instsoli:excluir_aviso' aviso.id %}" onclick="return confirm('Tem certeza que deseja excluir este aviso?');"><i class='bx bx-trash'></i></a>
+                            <a href="#" class="editBtn" data-id="{{ aviso.id }}" data-titulo="{{ aviso.titulo }}" data-mensagem="{{ aviso.mensagem }}" data-prioridade="{{ aviso.prioridade }}"><i class='bx bx-pencil'></i></a>
                         {% endif %}
                         {{ aviso.professor.get_full_name|default:aviso.professor.username }}
                         {% if aviso.prioridade == 'importante' %}
@@ -310,6 +314,32 @@
         </div>
     </div>
 
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close-edit">&times;</span>
+            <h2>Editar Aviso</h2>
+            <form method="POST" id="editForm">
+                {% csrf_token %}
+                <input type="hidden" id="editId" name="id">
+                
+                <label for="editTitulo">Título</label>
+                <input type="text" id="editTitulo" name="titulo" required>
+
+                <label for="editMensagem">Mensagem</label>
+                <textarea id="editMensagem" name="mensagem" required></textarea>
+
+                <label for="editPrioridade">Prioridade</label>
+                <select id="editPrioridade" name="prioridade" required>
+                    <option value="normal">Normal</option>
+                    <option value="importante">Importante</option>
+                    <option value="urgente">Urgente</option>
+                </select>
+
+                <button type="submit">Salvar Alterações</button>
+            </form>
+        </div>
+    </div>
+
     <script src="{% static 'instsoli/js/scripts.js' %}"></script>
     <script>
         const modal = document.getElementById("avisoModal");
@@ -327,6 +357,38 @@
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
+            }
+        }
+
+        const editModal = document.getElementById("editModal");
+        const editBtns = document.querySelectorAll(".editBtn");
+        const closeEdit = document.querySelector(".close-edit");
+
+        editBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const id = this.dataset.id;
+                const titulo = this.dataset.titulo;
+                const mensagem = this.dataset.mensagem;
+                const prioridade = this.dataset.prioridade;
+
+                document.getElementById('editId').value = id;
+                document.getElementById('editTitulo').value = titulo;
+                document.getElementById('editMensagem').value = mensagem;
+                document.getElementById('editPrioridade').value = prioridade;
+
+                document.getElementById('editForm').action = `/avisos/editar/${id}/`;
+
+                editModal.style.display = "block";
+            });
+        });
+
+        closeEdit.onclick = function() {
+            editModal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == editModal) {
+                editModal.style.display = "none";
             }
         }
     </script>
