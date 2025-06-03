@@ -28,8 +28,7 @@ urlpatterns = [
     path('avisos/', views.avisos_list, name='avisos'),
     path('avisos/criar/', views.criar_aviso, name='criar_aviso'),
     path('avisos/editar/<int:id>/', views.editar_aviso, name='editar_aviso'),
-    path('avisos/buscar/', views.lista_avisos, name='avisos'),
-    path('avisos/excluir/<int:aviso_id>/', views.excluir_aviso, name='excluir_aviso'),
+    path('avisos/excluir/<int:id>/', views.excluir_aviso, name='excluir_aviso'),
 
     ## solicitacoes professor
     path('portal_professor/solicitacoes/', views.professor_solicitacoes, name='professor_solicitacoes'),

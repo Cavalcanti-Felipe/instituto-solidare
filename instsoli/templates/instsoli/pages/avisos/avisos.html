@@ -215,6 +215,37 @@
         width: 400px;
         position: relative;
         box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .aviso-mensagem {
+        margin-top: 20px;
+        padding: 15px;
+        background: #f9f9f9;
+        border-radius: 8px;
+        max-height: 300px; /* Altura máxima antes do scroll */
+        overflow-y: auto; /* Scroll vertical quando necessário */
+        word-wrap: break-word; /* Quebra palavras longas */
+    }
+
+    /* Estilizando a scrollbar */
+    .aviso-mensagem::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .aviso-mensagem::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+
+    .aviso-mensagem::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 4px;
+    }
+
+    .aviso-mensagem::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
     }
 
     .close {
@@ -274,8 +305,36 @@
         background-color: #254d32;
     }
 
-    main-content{
-        backgroud-color: white;
+    .aviso-meta {
+        margin: 10px 0;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .descricao {
+        color: #666;
+        font-size: 14px;
+        margin-top: 4px;
+        cursor: pointer;
+    }
+
+    .descricao:hover {
+        color: #2E5F3E;
+        text-decoration: underline;
+    }
+
+    .close-view {
+        color: #aaa;
+        position: absolute;
+        right: 16px;
+        top: 12px;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close-view:hover {
+        color: black;
     }
 </style>
 <body>
@@ -292,13 +351,15 @@
             <h3 style="color:rgb(41, 82, 55)">Ultimos avisos...</h3>
             {% endif %}
 
-            <form method="get" class="search">
+            <form method="GET" action="{% url 'instsoli:avisos' %}" class="search">
                 <i class='bx bx-search'></i>
                 <input 
                     type="text" 
                     name="busca" 
                     placeholder="Buscar avisos..."
                     value="{{ busca }}">
+                <!-- Botão escondido visualmente mas funcional -->
+                <button type="submit" style="display: none;"></button>
             </form>
         </div>
 
@@ -321,7 +382,13 @@
                         {% endif %}
                     </span>
                     <p class="assunto">{{ aviso.titulo }}</p>
-                    <p class="descricao">{{ aviso.mensagem|truncatechars:120 }}</p>
+                    <p class="descricao" data-titulo="{{ aviso.titulo }}" data-mensagem="{{ aviso.mensagem }}" 
+                    data-autor="{{ aviso.professor.get_full_name|default:aviso.professor.username }}" 
+                    data-prioridade="{{ aviso.prioridade }}" 
+                    data-data="{{ aviso.data_criacao|date:'H:i d/m' }}">
+                    {{ aviso.mensagem|truncatechars:120 }}
+                    {% if aviso.mensagem|length > 120 %}<span style="color: #2E5F3E;"> (ver mais)</span>{% endif %}
+                    </p>
                 </div>
                 <div class="hora">
                     {{ aviso.data_criacao|date:"H:i d/m" }}
@@ -382,58 +449,129 @@
             </form>
         </div>
     </div>
+    
+    <!-- Modal para visualização completa do aviso -->
+    <div id="viewModal" class="modal">
+        <div class="modal-content" style="width: 600px;">
+            <span class="close-view">&times;</span>
+            <h2 id="viewTitulo"></h2>
+            <div class="aviso-meta">
+                <span id="viewAutor" style="font-weight: 600;"></span>
+                <span id="viewPrioridade" style="margin-left: 10px;"></span>
+                <span id="viewData" style="float: right; color: #888;"></span>
+            </div>
+            <div class="aviso-mensagem" style="margin-top: 20px; padding: 10px; background: #f9f9f9; border-radius: 8px;">
+                <p id="viewMensagem" style="white-space: pre-line;"></p>
+            </div>
+        </div>
+    </div>
 
     <script src="{% static 'instsoli/js/scripts.js' %}"></script>
     <script>
-        const modal = document.getElementById("avisoModal");
-        const btn = document.getElementById("openModal");
-        const span = document.getElementsByClassName("close")[0];
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById("avisoModal");
+            const btn = document.getElementById("openModal");
+            const span = document.getElementsByClassName("close")[0];
 
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
+            if (btn) {
+                btn.onclick = function() {
+                    modal.style.display = "block";
+                }
             }
-        }
 
-        const editModal = document.getElementById("editModal");
-        const editBtns = document.querySelectorAll(".editBtn");
-        const closeEdit = document.querySelector(".close-edit");
+            if (span) {
+                span.onclick = function() {
+                    modal.style.display = "none";
+                }
+            }
 
-        editBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                const id = this.dataset.id;
-                const titulo = this.dataset.titulo;
-                const mensagem = this.dataset.mensagem;
-                const prioridade = this.dataset.prioridade;
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
 
-                document.getElementById('editId').value = id;
-                document.getElementById('editTitulo').value = titulo;
-                document.getElementById('editMensagem').value = mensagem;
-                document.getElementById('editPrioridade').value = prioridade;
+            const editModal = document.getElementById("editModal");
+            const editBtns = document.querySelectorAll(".editBtn");
+            const closeEdit = document.querySelector(".close-edit");
 
-                document.getElementById('editForm').action = `/avisos/editar/${id}/`;
+            if (editBtns) {
+                editBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.dataset.id;
+                        const titulo = this.dataset.titulo;
+                        const mensagem = this.dataset.mensagem;
+                        const prioridade = this.dataset.prioridade;
 
-                editModal.style.display = "block";
+                        document.getElementById('editId').value = id;
+                        document.getElementById('editTitulo').value = titulo;
+                        document.getElementById('editMensagem').value = mensagem;
+                        document.getElementById('editPrioridade').value = prioridade;
+
+                        document.getElementById('editForm').action = `/avisos/editar/${id}/`;
+
+                        editModal.style.display = "block";
+                    });
+                });
+            }
+
+            if (closeEdit) {
+                closeEdit.onclick = function() {
+                    editModal.style.display = "none";
+                }
+            }
+
+            const viewModal = document.getElementById("viewModal");
+            const closeView = document.querySelector(".close-view");
+
+            // Event delegation para lidar com cliques nas descrições
+            document.addEventListener('click', function(event) {
+                // Verifica se o clique foi em um elemento com classe 'descricao' ou em seu filho
+                let descElement = null;
+                if (event.target.classList.contains('descricao')) {
+                    descElement = event.target;
+                } else if (event.target.parentElement && event.target.parentElement.classList.contains('descricao')) {
+                    descElement = event.target.parentElement;
+                }
+
+                if (descElement && descElement.dataset.mensagem && descElement.dataset.mensagem.length > 120) {
+                    document.getElementById('viewTitulo').textContent = descElement.dataset.titulo;
+                    document.getElementById('viewMensagem').textContent = descElement.dataset.mensagem;
+                    document.getElementById('viewAutor').textContent = descElement.dataset.autor;
+                    document.getElementById('viewData').textContent = descElement.dataset.data;
+                    
+                    const prioridadeElem = document.getElementById('viewPrioridade');
+                    prioridadeElem.className = 'prioridade';
+                    if (descElement.dataset.prioridade === 'importante') {
+                        prioridadeElem.classList.add('prioridade-importante');
+                        prioridadeElem.textContent = 'Importante';
+                    } else if (descElement.dataset.prioridade === 'urgente') {
+                        prioridadeElem.classList.add('prioridade-urgente');
+                        prioridadeElem.textContent = 'Urgente';
+                    } else {
+                        prioridadeElem.classList.add('prioridade-normal');
+                        prioridadeElem.textContent = 'Normal';
+                    }
+
+                    viewModal.style.display = "block";
+                }
             });
-        });
 
-        closeEdit.onclick = function() {
-            editModal.style.display = "none";
-        }
-
-        window.onclick = function(event) {
-            if (event.target == editModal) {
-                editModal.style.display = "none";
+            if (closeView) {
+                closeView.onclick = function() {
+                    viewModal.style.display = "none";
+                }
             }
-        }
+
+            window.onclick = function(event) {
+                if (event.target == editModal) {
+                    editModal.style.display = "none";
+                }
+                if (event.target == viewModal) {
+                    viewModal.style.display = "none";
+                }
+            }
+        });
     </script>
 </body>
 </html>

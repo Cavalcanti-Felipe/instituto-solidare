@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.http import JsonResponse
 import json
-from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
 from datetime import date
 
 def is_admin(user):
@@ -216,9 +216,20 @@ def registrar_frequencia(request, id):
 # avisos professor
 @login_required(login_url='usuario:login')
 def avisos_list(request):
+    busca = request.GET.get('busca', '')
+    
     avisos = Aviso.objects.all().order_by('-data_criacao')
+    
+    if busca:
+        avisos = avisos.filter(
+            Q(titulo__icontains=busca) |
+            Q(mensagem__icontains=busca) |
+            Q(professor__username__icontains=busca)
+        )
+    
     return render(request, 'instsoli/pages/avisos/avisos.html', context={
-        'avisos': avisos
+        'avisos': avisos,
+        'busca': busca
     })
 
 @login_required(login_url='usuario:login')
@@ -250,32 +261,13 @@ def editar_aviso(request, id):
 
     return redirect('instsoli:avisos')
 
-def excluir_aviso(request, aviso_id):
-    aviso = get_object_or_404(Aviso, id=aviso_id)
+def excluir_aviso(request, id):
+    aviso = get_object_or_404(Aviso, id=id)
 
     if request.user == aviso.professor or request.user.is_superuser:
         aviso.delete()
 
     return redirect('instsoli:avisos')
-
-def lista_avisos(request):
-    busca = request.GET.get('busca', '')
-    if busca:
-        avisos = Aviso.objects.filter(
-            titulo__icontains=busca
-        ) | Aviso.objects.filter(
-            mensagem__icontains=busca
-        ) | Aviso.objects.filter(
-            professor__username__icontains=busca
-        )
-    else:
-        avisos = Aviso.objects.all()
-    
-    return render(request, 'instsoli/pages/avisos/avisos.html', context={
-        'avisos': avisos,
-        'busca': busca
-    })
-
 
 
 
