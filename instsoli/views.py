@@ -217,7 +217,7 @@ def registrar_frequencia(request, id):
 @login_required(login_url='usuario:login')
 def avisos_list(request):
     avisos = Aviso.objects.all().order_by('-data_criacao')
-    return render(request, 'instsoli/pages/portal_professor/avisos/avisos.html', context={
+    return render(request, 'instsoli/pages/avisos/avisos.html', context={
         'avisos': avisos
     })
 
@@ -271,7 +271,7 @@ def lista_avisos(request):
     else:
         avisos = Aviso.objects.all()
     
-    return render(request, 'instsoli/pages/portal_professor/avisos/avisos.html', context={
+    return render(request, 'instsoli/pages/avisos/avisos.html', context={
         'avisos': avisos,
         'busca': busca
     })
