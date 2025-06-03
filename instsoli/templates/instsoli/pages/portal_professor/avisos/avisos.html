@@ -1,147 +1,334 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bloom | Portal do Professor</title>
+    <title>Bloom | Avisos</title>
     <link rel="stylesheet" href="{% static 'instsoli/css/style.css' %}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
+<style>
+    .header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .header h1 {
+        font-size: 32px;
+        color: #2E5F3E;
+        font-weight: 700;
+    }
+
+    .header .back {
+        color: #333;
+        text-decoration: none;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+    }
+
+    .header .back i {
+        font-size: 24px;
+        margin-right: 4px;
+    }
+
+    .actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 20px 0;
+    }
+
+    .actions button {
+        background: #f1f1f1;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.2s;
+        font-weight: 500;
+    }
+
+    .actions button:hover {
+        background: #e2e2e2;
+    }
+
+    .actions .primary {
+        background-color: #2E5F3E;
+        color: white;
+    }
+
+    .actions .primary:hover {
+        background-color: #254d32;
+    }
+
+    .search {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        background: #f1f1f1;
+        padding: 6px 10px;
+        border-radius: 8px;
+    }
+
+    .search input {
+        border: none;
+        background: transparent;
+        outline: none;
+        padding: 4px 8px;
+    }
+
+    .search i {
+        color: #888;
+        font-size: 18px;
+    }
+
+    .avisos-list {
+        border-top: 1px dashed #ccc;
+    }
+
+    .aviso-item {
+        display: flex;
+        align-items: start;
+        padding: 16px 0;
+        border-bottom: 1px dashed #ccc;
+    }
+
+    .checkbox {
+        margin-right: 12px;
+        margin-top: 4px;
+    }
+
+    .aviso-content {
+        flex: 1;
+    }
+
+    .autor {
+        display: block;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .assunto {
+        margin: 4px 0;
+        font-weight: 500;
+        color: #555;
+    }
+
+    .descricao {
+        color: #666;
+        font-size: 14px;
+        margin-top: 4px;
+    }
+
+    .hora {
+        white-space: nowrap;
+        font-size: 12px;
+        color: #888;
+        margin-left: 10px;
+    }
+
+    .dot {
+        color: red;
+        font-size: 20px;
+        margin-right: 4px;
+    }
+
+    .prioridade {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        margin-left: 6px;
+    }
+
+    .prioridade-normal {
+        background: #f1f1f1;
+        color: #555;
+    }
+
+    .prioridade-importante {
+        background: #FFE58F;
+        color: #8B5700;
+    }
+
+    .prioridade-urgente {
+        background: #FFA39E;
+        color: #a8071a;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+        background-color: #fff;
+        margin: 8% auto;
+        padding: 20px;
+        border-radius: 12px;
+        width: 400px;
+        position: relative;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .close {
+        color: #aaa;
+        position: absolute;
+        right: 16px;
+        top: 12px;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close:hover {
+        color: black;
+    }
+
+    .modal-content h2 {
+        margin-top: 0;
+        color: #2E5F3E;
+    }
+
+    .modal-content label {
+        display: block;
+        margin-top: 12px;
+        margin-bottom: 4px;
+        font-weight: 500;
+    }
+
+    .modal-content input[type="text"],
+    .modal-content textarea,
+    .modal-content select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        outline: none;
+        font-size: 14px;
+    }
+
+    .modal-content textarea {
+        resize: vertical;
+        min-height: 80px;
+    }
+
+    .modal-content button {
+        background-color: #2E5F3E;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 16px;
+        width: 100%;
+    }
+
+    .modal-content button:hover {
+        background-color: #254d32;
+    }
+</style>
 <body>
     {% include "instsoli/partials/sidebar.html" %}
 
-    <main class="main-container">
-        <!-- Navbar específica para Avisos -->
-        <nav class="avisos-navbar">
-            <div class="navbar-content">
-                <h1 class="navbar-title">
-                    <i class='bx bx-bell'></i>
-                    Avisos
-                </h1>
-                <button id="abrirModal" class="btn-adicionar">
-                    <i class='bx bx-plus'></i> Adicionar Aviso
-                </button>
-            </div>
-        </nav>
+    <main>
+        <div class="header">
+            <a href="#" class="back"><i class='bx bx-chevron-left'></i> Voltar</a>
+            <h1>Avisos</h1>
+        </div>
 
-        <div class="avisos-content">
-            <div class="cards-container" id="avisosContainer">
-                {% for aviso in avisos %}
-                <div class="aviso-box">
-                    <div class="card-acoes">
-                        <a href="#" class="editar-btn"
-                           data-id="{{ aviso.id }}"
-                           data-titulo="{{ aviso.titulo }}"
-                           data-mensagem="{{ aviso.mensagem }}"
-                           data-prioridade="{{ aviso.prioridade }}">
-                            <i class="bx bx-pencil"></i>
-                        </a>
-                        <a href="{% url 'instsoli:excluir_aviso' aviso.id %}"
-                            <i class="bx bx-x"></i>
-                        </a>
-                    </div>
-                    <h3>{{ aviso.titulo }}</h3>
-                    <p>{{ aviso.mensagem }}</p>
-                    <div class="card-data">
-                        Professor: {{ aviso.professor }} <br>
-                        Publicado em: {{ aviso.data_criacao|date:"d/m/Y" }}
-                    </div>
-                </div>
-                {% empty %}
-                <p class="sem-avisos">Nenhum aviso cadastrado ainda.</p>
-                {% endfor %}
+        <div class="actions">
+            <button id="openModal" class="primary">+ Novo Aviso</button>
+
+            <div class="search">
+                <input type="text" placeholder="Busca">
+                <i class='bx bx-search'></i>
             </div>
         </div>
 
-        <!-- Modal para adicionar/editar aviso -->
-        <div id="avisoModal" class="modal">
-            <div class="modal-conteudo">
-                <div class="modal-header">
-                    <h2 id="modalTitulo">Adicionar Novo Aviso</h2>
-                    <span class="fechar-modal">&times;</span>
+        <div class="avisos-list">
+            {% for aviso in avisos %}
+            <div class="aviso-item">
+                <div class="checkbox">
+                    <input type="checkbox" name="aviso_{{ aviso.id }}">
                 </div>
-                <form id="formAviso" method="POST" action="{% url 'instsoli:criar_aviso' %}">
-                    {% csrf_token %}
-                    <input type="hidden" id="avisoId" name="aviso_id">
-                    <div class="input-group">
-                        <label for="titulo">Título:</label>
-                        <input type="text" id="titulo" name="titulo" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="mensagem">Mensagem:</label>
-                        <textarea id="mensagem" name="mensagem" required></textarea>
-                    </div>
-                    <div class="input-group">
-                        <label for="prioridade">Prioridade:</label>
-                        <select id="prioridade" name="prioridade">
-                            <option value="normal">Normal</option>
-                            <option value="importante">Importante</option>
-                            <option value="urgente">Urgente</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn-salvar">Salvar Aviso</button>
-                </form>
+                <div class="aviso-content">
+                    <span class="autor">
+                        {{ aviso.professor.get_full_name|default:aviso.professor.username }}
+                        {% if aviso.prioridade == 'importante' %}
+                            <span class="prioridade prioridade-importante">Importante</span>
+                        {% elif aviso.prioridade == 'urgente' %}
+                            <span class="prioridade prioridade-urgente">Urgente</span>
+                        {% else %}
+                            <span class="prioridade prioridade-normal">Normal</span>
+                        {% endif %}
+                    </span>
+                    <p class="assunto">{{ aviso.titulo }}</p>
+                    <p class="descricao">{{ aviso.mensagem|truncatechars:120 }}</p>
+                </div>
+                <div class="hora">
+                    {{ aviso.data_criacao|date:"H:i d/m" }}
+                </div>
             </div>
+            {% empty %}
+            <p>Sem avisos no momento.</p>
+            {% endfor %}
         </div>
     </main>
+
+    <div id="avisoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Novo Aviso</h2>
+            <form method="POST" action="{% url 'instsoli:criar_aviso' %}">
+                {% csrf_token %}
+                <label for="titulo">Título</label>
+                <input type="text" id="titulo" name="titulo" required>
+
+                <label for="mensagem">Mensagem</label>
+                <textarea id="mensagem" name="mensagem" required></textarea>
+
+                <label for="prioridade">Prioridade</label>
+                <select id="prioridade" name="prioridade" required>
+                    <option value="normal">Normal</option>
+                    <option value="importante">Importante</option>
+                    <option value="urgente">Urgente</option>
+                </select>
+
+                <button type="submit">Criar Aviso</button>
+            </form>
+        </div>
+    </div>
 
     <script src="{% static 'instsoli/js/scripts.js' %}"></script>
     <script>
         const modal = document.getElementById("avisoModal");
-        const btnAbrir = document.getElementById("abrirModal");
-        const btnFechar = document.querySelector(".fechar-modal");
-        const form = document.getElementById("formAviso");
-        const modalTitulo = document.getElementById("modalTitulo");
+        const btn = document.getElementById("openModal");
+        const span = document.getElementsByClassName("close")[0];
 
-        // Abrir modal para criar
-        btnAbrir.onclick = function () {
-            form.action = "{% url 'instsoli:criar_aviso' %}";
-            modalTitulo.textContent = "Adicionar Novo Aviso";
-            form.reset();
+        btn.onclick = function() {
             modal.style.display = "block";
         }
 
-        // Fechar modal
-        btnFechar.onclick = function () {
+        span.onclick = function() {
             modal.style.display = "none";
         }
 
-        window.onclick = function (event) {
+        window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         }
-
-        // Modal de edição
-        document.querySelectorAll('.editar-btn').forEach(btn => {
-            btn.addEventListener('click', function (e) {
-                e.preventDefault();
-                const avisoId = this.getAttribute('data-id');
-                const titulo = this.getAttribute('data-titulo');
-                const mensagem = this.getAttribute('data-mensagem');
-                const prioridade = this.getAttribute('data-prioridade');
-
-                document.getElementById('titulo').value = titulo;
-                document.getElementById('mensagem').value = mensagem;
-                document.getElementById('prioridade').value = prioridade;
-                document.getElementById('avisoId').value = avisoId;
-
-                form.action = "{% url 'instsoli:editar_aviso' 0 %}".replace("0", avisoId);  // Ajuste conforme sua URL de edição
-                modalTitulo.textContent = "Editar Aviso";
-                modal.style.display = "block";
-            });
-        });
-
-        // Confirmação para excluir aviso
-        document.querySelectorAll('.bx-x').forEach(item => {
-            item.addEventListener('click', function (e) {
-                if (!confirm('Tem certeza que deseja excluir este aviso?')) {
-                    e.preventDefault();
-                }
-            });
-        });
     </script>
 </body>
 </html>

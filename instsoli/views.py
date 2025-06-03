@@ -216,11 +216,12 @@ def registrar_frequencia(request, id):
 # avisos professor
 @user_passes_test(is_admin, login_url='instsoli:home')
 @login_required(login_url='usuario:login')
-def avisos(request):
-    avisos = Aviso.objects.filter(professor=request.user).order_by('-data_criacao')
+def avisos_list(request):
+    avisos = Aviso.objects.all().order_by('-data_criacao')
     return render(request, 'instsoli/pages/portal_professor/avisos/avisos.html', context={
         'avisos': avisos
     })
+
 
 @user_passes_test(is_admin, login_url='instsoli:home')
 @login_required(login_url='usuario:login')
@@ -237,42 +238,19 @@ def criar_aviso(request):
             prioridade=prioridade
         )
         return redirect('instsoli:avisos')
-
-@user_passes_test(is_admin, login_url='instsoli:home')
-@login_required(login_url='usuario:login')
-def editar_aviso(request, aviso_id):
-    aviso = get_object_or_404(Aviso, id=aviso_id, professor=request.user)
-
-    if request.method == 'POST':
-        aviso.titulo = request.POST.get('titulo')
-        aviso.mensagem = request.POST.get('mensagem')
-        aviso.prioridade = request.POST.get('prioridade')
-        aviso.save()
-
-        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            return JsonResponse({'success': True})
-        
-        return redirect('instsoli:avisos')
-
-    return render(request, 'editar_aviso.html', {'aviso': aviso})
-
-@user_passes_test(is_admin, login_url='instsoli:home')
-@login_required(login_url='usuario:login')
-def get_aviso_data(request, aviso_id):
-    aviso = get_object_or_404(Aviso, id=aviso_id, professor=request.user)
-    data = {
-        'titulo': aviso.titulo,
-        'mensagem': aviso.mensagem,
-        'prioridade': aviso.prioridade,
-    }
-    return JsonResponse(data)
-
-@user_passes_test(is_admin, login_url='instsoli:home')
-@login_required(login_url='usuario:login')
-def excluir_aviso(request, aviso_id):
-    aviso = get_object_or_404(Aviso, id=aviso_id, professor=request.user)
-    aviso.delete()
     return redirect('instsoli:avisos')
+
+
+
+
+
+
+
+
+
+
+
+
 
 # solicitacoes professor
 @user_passes_test(is_admin, login_url='instsoli:home')

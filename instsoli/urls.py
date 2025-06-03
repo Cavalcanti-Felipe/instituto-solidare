@@ -25,11 +25,8 @@ urlpatterns = [
     path('portal_professor/turmas/frequencia/<int:id>', views.registrar_frequencia, name='registrar_frequencia'),
 
     # avisos
-    path('portal_professor/avisos/', views.avisos, name='avisos'),
-    path('portal_professor/avisos/criar/', views.criar_aviso, name='criar_aviso'),
-    path('portal_professor/avisos/editar/<int:aviso_id>/', views.editar_aviso, name='editar_aviso'),
-    path('portal_professor/avisos/excluir/<int:aviso_id>/', views.excluir_aviso, name='excluir_aviso'),
-    path('portal_professor/avisos/get/<int:aviso_id>/', views.get_aviso_data, name='get_aviso_data'),
+    path('avisos/', views.avisos_list, name='avisos'),
+    path('avisos/criar/', views.criar_aviso, name='criar_aviso'),
 
     ## solicitacoes professor
     path('portal_professor/solicitacoes/', views.professor_solicitacoes, name='professor_solicitacoes'),
