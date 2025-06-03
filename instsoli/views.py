@@ -360,9 +360,52 @@ def capturar_solicitacao(request, id):
 
 # materiais
 def materiais(request):
+    cursos = Curso.objects.all()
     materiais = Material.objects.all()
-    return render(request, 'instsoli/pages/portal_professor/materiais/materiais.html', context={
-        'materiais':materiais
+
+    if request.method == 'POST':
+        material_id = request.POST.get('material_id')  # Verifica se é edição
+        nome = request.POST.get('nome')
+        curso_id = request.POST.get('curso')
+        aula = request.POST.get('aula')
+        tipo = request.POST.get('tipo')
+        documento = request.FILES.get('documento')
+
+        try:
+            curso = Curso.objects.get(id=curso_id)
+
+            if material_id:  # 👉 Edição
+                material = Material.objects.get(id=material_id)
+                material.nome = nome
+                material.curso = curso
+                material.aula = aula
+                material.tipo = tipo
+
+                if documento:
+                    material.documento = documento
+
+                material.save()
+                messages.success(request, 'Material atualizado com sucesso!')
+            else:  # 👉 Adição
+                Material.objects.create(
+                    nome=nome,
+                    curso=curso,
+                    aula=aula,
+                    tipo=tipo,
+                    documento=documento
+                )
+                messages.success(request, 'Material adicionado com sucesso!')
+
+            return redirect('instsoli:materiais')
+
+        except Curso.DoesNotExist:
+            messages.error(request, 'Curso não encontrado.')
+        except Material.DoesNotExist:
+            messages.error(request, 'Material não encontrado.')
+
+    return render(request, 'instsoli/pages/portal_professor/materiais/materiais.html', {
+        'materiais': materiais,
+        'cursos': cursos,
     })
 
 def delete_materiais(request, id):
@@ -375,26 +418,6 @@ def delete_materiais(request, id):
     material.delete()
     messages.success(request, "Material deletado com sucesso.")
     return redirect('instsoli:materiais')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ### portal do aluno
 @login_required(login_url='usuario:login')

@@ -146,6 +146,60 @@
             background-color: #3a5f38;
             color: white;
         }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 6px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
     </style>
 </head>
 <body>    
@@ -196,7 +250,7 @@
                         {% endif %}
                         {% if user.is_superuser %}
                         <a href="{% url 'instsoli:delete_materiais' material.id %}" class="btn deletar" onclick="return confirm('Tem certeza que deseja deletar este material?');"> <i class='bx bxs-trash'></i></a>
-                        <a href="#" class="btn edit"><i class='bx bxs-pencil'></i></a>
+                        <a href="#" class="btn edit" onclick="openEditModal('{{ material.id }}', '{{ material.nome }}', '{{ material.curso.id }}', '{{ material.aula }}', '{{ material.tipo }}')"><i class='bx bxs-pencil'></i></a>
                         {% endif %}
                     </td>
                 </tr>
@@ -211,11 +265,95 @@
         <!-- Botões de ação -->
         <div class="acoes">
             {% if user.is_superuser %}
-            <button class="btn adicionar"><i class='bx bx-plus'></i> Adicionar</button>
+            <button id="openModalBtn" class="btn"><i class="bx bx-plus"></i> Adicionar</button>
             {% endif %}
+        </div>
+
+        <!-- Modal -->
+        <div id="materialModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modalTitle">Adicionar Material</h2>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="material_id" id="material-id">
+
+                    <label>Nome:</label>
+                    <input type="text" name="nome" id="nome" required>
+
+                    <label>Curso:</label>
+                    <select name="curso" id="curso" required>
+                        <option value="">Selecione...</option>
+                        {% for curso in cursos %}
+                        <option value="{{ curso.id }}">{{ curso.nome }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <label>Aula:</label>
+                    <input type="number" name="aula" id="aula" min="1" required>
+
+                    <label>Tipo:</label>
+                    <select name="tipo" id="tipo" required>
+                        <option value="PDF">PDF</option>
+                        <option value="Vídeo">Vídeo</option>
+                        <option value="Link">Link</option>
+                    </select>
+
+                    <label>Arquivo (opcional):</label>
+                    <input type="file" name="documento">
+
+                    <button type="submit" class="btn">Salvar</button>
+                </form>
+            </div>
         </div>
     </main>
 
     <script src="{% static 'instsoli/js/scripts.js' %}"></script>
+    <script>
+        const modal = document.getElementById("materialModal");
+        const btn = document.getElementById("openModalBtn");
+        const span = document.getElementsByClassName("close")[0];
+
+        const modalTitle = document.getElementById("modalTitle");
+        const materialIdInput = document.getElementById("material-id");
+        const nomeInput = document.getElementById("nome");
+        const cursoInput = document.getElementById("curso");
+        const aulaInput = document.getElementById("aula");
+        const tipoInput = document.getElementById("tipo");
+
+        // 👉 Abrir modal para ADICIONAR
+        btn.onclick = function() {
+            modalTitle.innerText = "Adicionar Material";
+            materialIdInput.value = "";
+            nomeInput.value = "";
+            cursoInput.value = "";
+            aulaInput.value = "";
+            tipoInput.value = "";
+            modal.style.display = "block";
+        }
+
+        // 👉 Abrir modal para EDITAR
+        function openEditModal(id, nome, cursoId, aula, tipo) {
+            modalTitle.innerText = "Editar Material";
+            materialIdInput.value = id;
+            nomeInput.value = nome;
+            cursoInput.value = cursoId;
+            aulaInput.value = aula;
+            tipoInput.value = tipo;
+            modal.style.display = "block";
+        }
+
+        // Fechar modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>

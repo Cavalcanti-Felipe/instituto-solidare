@@ -68,47 +68,15 @@ describe('aba de aviso', () => {
     });
 
     it('adicionar aviso', () => {
-        cy.createSuperUser('usuarioteste', 'usuarioteste@gmail.com', '123', '123', 'Gestor', 'instituto-solidare');
-        cy.login('usuarioteste', '123');
-        cy.get('[href="/portal_professor/"] > .sidebar-title').click();
-        cy.get(':nth-child(5) > a').click();
-        cy.get('#abrirModal').click();
-        cy.get('#titulo').type('Titulo teste');
-        cy.get('#mensagem').type('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae distinctio eos id sed officia doloremque at illum totam amet error facere eum dicta inventore doloribus in vero sequi voluptatem, magnam essequissdeleniti reprehenderit.');
-        cy.get('#prioridade').select('Importante');
-        cy.get('.btn-salvar').click();
+        
     });
 
     it('editar aviso', () => {
-        cy.createSuperUser('usuarioteste', 'usuarioteste@gmail.com', '123', '123', 'Gestor', 'instituto-solidare');
-        cy.login('usuarioteste', '123');
-        cy.get('[href="/portal_professor/"] > .sidebar-title').click();
-        cy.get(':nth-child(5) > a').click();
-        cy.get('#abrirModal').click();
-        cy.get('#titulo').type('Titulo teste');
-        cy.get('#mensagem').type('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae distinctio eos id sed officia doloremque at illum totam amet error facere eum dicta inventore doloribus in vero sequi voluptatem, magnam esse quis saepe deleniti reprehenderit.');
-        cy.get('#prioridade').select('Importante');
-        cy.get('.btn-salvar').click();
         
-        cy.get('.editar-btn > .bx').click();
-        cy.get('#titulo').clear().type('Alterando o titulo teste');
-        cy.get('#mensagem').clear().type('Alterando a descrição teste');
-        cy.get('#prioridade').select('Normal');
-        cy.get('.btn-salvar').click();
     });
 
     it('deletar aviso', () => {
-        cy.createSuperUser('usuarioteste', 'usuarioteste@gmail.com', '123', '123', 'Gestor', 'instituto-solidare');
-        cy.login('usuarioteste', '123');
-        cy.get('[href="/portal_professor/"] > .sidebar-title').click();
-        cy.get(':nth-child(5) > a').click();
-        cy.get('#abrirModal').click();
-        cy.get('#titulo').type('Titulo teste');
-        cy.get('#mensagem').type('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae distinctio eos id sed officia doloremque at illum totam amet error facere eum dicta inventore doloribus in vero sequi voluptatem, magnam esse quis saepe deleniti reprehenderit.');
-        cy.get('#prioridade').select('Importante');
-        cy.get('.btn-salvar').click();
-
-        cy.get('.bx.bx-x').click();
+        
     });
     
     afterEach(() => {

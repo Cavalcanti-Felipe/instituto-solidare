@@ -37,10 +37,6 @@ urlpatterns = [
     path('portal_professor/capturar_solicitacao/<int:id>/', views.capturar_solicitacao, name='capturar_solicitacao'),
     path('portal_professor/arquivar_solicitacao/<int:id>/', views.arquivar_solicitacao, name='arquivar_solicitacao'),
 
-    ## materiais
-    path('portal_professor/materiais/', views.materiais, name='materiais'),
-    path('portal_professor/materiais/delete/<int:id>/', views.delete_materiais, name='delete_materiais'),
-
     ## portal do aluno
     path('portal_aluno/', views.portal_aluno, name='portal_aluno'),
     path('portal_aluno/avisos_aluno/', views.avisos_aluno, name='avisos_aluno'),
@@ -55,5 +51,9 @@ urlpatterns = [
     path('listao_aprovados/', views.listao_aprovados, name='listao_aprovados'),
     path('listao_aprovados/adicionar/', views.adicionar_listao, name='adicionar_listao'),
     path('listao_aprovados/editar/<int:semestre_id>/', views.editar_listao, name='editar_listao'),
-    path('listao_aprovados/excluir/<int:semestre_id>/', views.excluir_listao, name='excluir_listao')
+    path('listao_aprovados/excluir/<int:semestre_id>/', views.excluir_listao, name='excluir_listao'),
+
+    ## materiais
+    path('materiais/', views.materiais, name='materiais'),
+    path('materiais/delete/<int:id>/', views.delete_materiais, name='delete_materiais'),
 ]
