@@ -1,0 +1,221 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloom | Materiais</title>
+    <link rel="stylesheet" href="{% static 'instsoli/css/style.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        main.content {
+            padding: 20px;
+        }
+
+        .titulo {
+            text-align: center;
+            color: #3a5f38;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        /* Barra de busca e filtro */
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            padding: 8px 30px 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .filter-btn {
+            background-color: #f2f2f2;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* Tabela */
+        .tabela {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .tabela thead {
+            border-bottom: 2px solid #000;
+        }
+
+        .tabela th, .tabela td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .tabela tbody tr {
+            border-bottom: 1px dotted #ccc;
+        }
+
+        .tabela tbody tr.selecionado {
+            background-color: #eef9f3;
+        }
+
+        .tabela a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        /* Paginação */
+        .pagination {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .pagination span {
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .pagination .current {
+            background-color: #3a5f38;
+            color: white;
+        }
+
+        .mostrar {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .mostrar select {
+            padding: 4px;
+        }
+
+        /* Botões */
+        .acoes {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn.adicionar {
+            background-color: white;
+            border: 1px solid #ccc;
+        }
+
+        .btn.deletar {
+            background-color: #d9534f;
+            color: white;
+        }
+
+        .btn.edit {
+            background-color:rgb(25, 95, 160);
+            color: white;
+        }
+
+        .btn.download {
+            background-color: #3a5f38;
+            color: white;
+        }
+    </style>
+</head>
+<body>    
+    {% include "instsoli/partials/sidebar.html" %}
+
+    <main class="content">
+        <h1 class="titulo">Material de Ensino</h1>
+
+        <!-- Barra de busca e filtro -->
+        <div class="toolbar">
+            <div class="search-box">
+                <input type="text" placeholder="Busca">
+                <i class='bx bx-search'></i>
+            </div>
+        </div>
+
+        <!-- Tabela de materiais -->
+        <table class="tabela">
+            <thead>
+                <tr>
+                    <th>Nome <i class='bx bx-sort'></i></th>
+                    <th>Curso</th>
+                    <th>Aula</th>
+                    <th>Tipo</th>
+                    <th>Data</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for material in materiais %}
+                <tr class="{% if material.selecionado %}selecionado{% endif %}">
+                    <td>
+                        {% if material.tipo == 'Link' %}
+                            <a href="{{ material.arquivo }}" target="_blank">{{ material.nome }}</a>
+                        {% else %}
+                            <a href="{{ material.arquivo.url }}">{{ material.nome }}</a>
+                        {% endif %}
+                    </td>
+                    <td>{{ material.curso }}</td>
+                    <td>{{ material.aula|default:"--" }}</td>
+                    <td>{{ material.tipo }}</td>
+                    <td>{{ material.data|date:"d/m/Y" }}</td>
+                    <td>
+                        {% if material.documento %}
+                        <a href="{{ material.documento.url }}" download class="btn download"><i class='bx bxs-download'></i></a>
+                        {% else %}
+                        <span class="btn download desabilitado">Sem arquivo</span>
+                        {% endif %}
+                        {% if user.is_superuser %}
+                        <a href="{% url 'instsoli:delete_materiais' material.id %}" class="btn deletar" onclick="return confirm('Tem certeza que deseja deletar este material?');"> <i class='bx bxs-trash'></i></a>
+                        <a href="#" class="btn edit"><i class='bx bxs-pencil'></i></a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6">Nenhum material encontrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Botões de ação -->
+        <div class="acoes">
+            {% if user.is_superuser %}
+            <button class="btn adicionar"><i class='bx bx-plus'></i> Adicionar</button>
+            {% endif %}
+        </div>
+    </main>
+
+    <script src="{% static 'instsoli/js/scripts.js' %}"></script>
+</body>
+</html>

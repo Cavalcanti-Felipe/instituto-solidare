@@ -37,6 +37,10 @@ urlpatterns = [
     path('portal_professor/capturar_solicitacao/<int:id>/', views.capturar_solicitacao, name='capturar_solicitacao'),
     path('portal_professor/arquivar_solicitacao/<int:id>/', views.arquivar_solicitacao, name='arquivar_solicitacao'),
 
+    ## materiais
+    path('portal_professor/materiais/', views.materiais, name='materiais'),
+    path('portal_professor/materiais/delete/<int:id>/', views.delete_materiais, name='delete_materiais'),
+
     ## portal do aluno
     path('portal_aluno/', views.portal_aluno, name='portal_aluno'),
     path('portal_aluno/avisos_aluno/', views.avisos_aluno, name='avisos_aluno'),

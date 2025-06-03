@@ -127,3 +127,20 @@ class Aprovado(models.Model):
 
     def __str__(self):
         return f"{self.nome} ({self.semestre.codigo})"
+    
+class Material(models.Model):
+    TIPO_CHOICES = [
+        ('PDF', 'PDF'),
+        ('Vídeo', 'Vídeo'),
+        ('Link', 'Link'),
+    ]
+
+    nome = models.CharField(max_length=100)
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+    aula = models.PositiveIntegerField(default=0)
+    documento = models.FileField(upload_to='materiais/', blank=True, null=True)
+    tipo = models.CharField(max_length=10, choices=TIPO_CHOICES)
+    data = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.nome} - {self.curso}'

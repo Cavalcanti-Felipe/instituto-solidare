@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Curso,Turma, Frequencia, Aviso, Solicitacao, SemestreAvaliativo, Aprovado
+from .models import Curso,Turma, Frequencia, Aviso, Solicitacao, SemestreAvaliativo, Aprovado, Material
 from usuario.models import InformacoesPessoais
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
@@ -357,6 +357,44 @@ def capturar_solicitacao(request, id):
                 }, status=400)
 
     return redirect('instsoli:professor_solicitacoes')
+
+# materiais
+def materiais(request):
+    materiais = Material.objects.all()
+    return render(request, 'instsoli/pages/portal_professor/materiais/materiais.html', context={
+        'materiais':materiais
+    })
+
+def delete_materiais(request, id):
+    material = get_object_or_404(Material, id=id)
+
+    if not request.user.is_superuser:
+        messages.error(request, "Você não tem permissão para deletar este material.")
+        return redirect('instsoli:materiais')
+
+    material.delete()
+    messages.success(request, "Material deletado com sucesso.")
+    return redirect('instsoli:materiais')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### portal do aluno
 @login_required(login_url='usuario:login')
