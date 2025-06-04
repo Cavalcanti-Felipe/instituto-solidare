@@ -80,68 +80,52 @@ describe('', () => {
         })
     });
 
-    it('criar turma', () => {
+it('enviar material de ensino', () => {
         cy.createSuperUser('usuarioteste', 'usuarioteste@gmail.com', '123', '123', 'Gestor',      'instituto-solidare');
         cy.login('usuarioteste', '123');
         cy.get('[href="/portal_professor/"]').click();
-        cy.get('section > :nth-child(1) > a').click();
-        cy.get('.btn-criar-turma').click();
-        cy.get('#nome').type('Turma teste');
+        cy.get(':nth-child(3) > a').click();
+        cy.get('#openModalBtn').click();
+        cy.get('#nome').type('Adiconando material teste');
         cy.get('#curso').select('Iniciação a Programação');
-        cy.get('#data_inicio').type('2025-05-17');
-        cy.get('#data_fim').type('2029-05-17');
-        cy.get('.select2-search').type('Rafael Ferraz');
-        cy.get('.select2-results__option').contains('Rafael Ferraz').click();
-        cy.get('.botao_criar-turma').click();
+        cy.get('#aula').type('1');
+        cy.get('#tipo').select('PDF');
+        cy.get('form > .btn').click(); 
     });
 
-    it('ver aluno', () => {
-       cy.createSuperUser('usuarioteste', 'usuarioteste@gmail.com', '123', '123', 'Gestor',      'instituto-solidare');
+it('editar material de ensino', () => {
+        cy.createSuperUser('usuarioteste', 'usuarioteste@gmail.com', '123', '123', 'Gestor',      'instituto-solidare');
         cy.login('usuarioteste', '123');
         cy.get('[href="/portal_professor/"]').click();
-        cy.get('section > :nth-child(1) > a').click();
-        cy.get('.btn-criar-turma').click();
-        cy.get('#nome').type('Turma teste');
+        cy.get(':nth-child(3) > a').click();
+        cy.get('#openModalBtn').click();
+        cy.get('#nome').type('Adiconando material teste');
         cy.get('#curso').select('Iniciação a Programação');
-        cy.get('#data_inicio').type('2025-05-17');
-        cy.get('#data_fim').type('2029-05-17');
-        cy.get('.select2-search').type('Rafael Ferraz');
-        cy.get('.select2-results__option').contains('Rafael Ferraz').click();
-        cy.get('.botao_criar-turma').click();
-        
-        cy.contains('a', 'Ver Alunos').click();
-
-    });
-
-     it('editar turma', () => {
-       cy.createSuperUser('usuarioteste', 'usuarioteste@gmail.com', '123', '123', 'Gestor',      'instituto-solidare');
-        cy.login('usuarioteste', '123');
-        cy.get('[href="/portal_professor/"]').click();
-        cy.get('section > :nth-child(1) > a').click();
-        cy.get('.btn-criar-turma').click();
-        cy.get('#nome').type('Turma teste');
-        cy.get('#curso').select('Iniciação a Programação');
-        cy.get('#data_inicio').type('2025-05-17');
-        cy.get('#data_fim').type('2029-05-17');
-        cy.get('.select2-search').type('Rafael Ferraz');
-        cy.get('.select2-results__option').contains('Rafael Ferraz').click();
-        cy.get('.botao_criar-turma').click();
-        
-        cy.contains('a', 'Editar turma').click();
-        cy.get('#nome').clear().type('Editando o nome da turma teste');
-        cy.get('#data_inicio').clear().type('2022-10-17');
-        cy.get('#data_fim').clear().type('2026-10-17');
-        cy.get('.botao_criar-turma').click();
-        
-
+        cy.get('#aula').type('1');
+        cy.get('#tipo').select('PDF');
+        cy.get('form > .btn').click();
+        cy.get('.edit > .bx').click();
+        cy.get('#nome').clear().type('editando material teste');
+        cy.get('#aula').clear().type('3');
+        cy.get('#tipo').select('Vídeo');
+        cy.get('form > .btn').click();
     });
     
+it('excluir material de ensino', () => {
+        cy.createSuperUser('usuarioteste', 'usuarioteste@gmail.com', '123', '123', 'Gestor',      'instituto-solidare');
+        cy.login('usuarioteste', '123');
+        cy.get('[href="/portal_professor/"]').click();
+        cy.get(':nth-child(3) > a').click();
+        cy.get('#openModalBtn').click();
+        cy.get('#nome').type('Adiconando material teste');
+        cy.get('#curso').select('Iniciação a Programação');
+        cy.get('#aula').type('1');
+        cy.get('#tipo').select('PDF');
+        cy.get('form > .btn').click();
+        cy.get('.deletar').click();  
+    });
 
-
-
-
-
-    afterEach(() => {
+ afterEach(() => {
         cy.deleteAllUsers();
         cy.deleteAllInformacoes();
     });   
