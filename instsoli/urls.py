@@ -54,4 +54,9 @@ urlpatterns = [
     ## materiais
     path('materiais/', views.materiais, name='materiais'),
     path('materiais/delete/<int:id>/', views.delete_materiais, name='delete_materiais'),
+
+    ## documentacao
+    path('documentacao/', views.documentacao, name='documentacao'),
+    path('documentacao/deletar/<int:id>/', views.deletar_documento, name='deletar_documento'),
+
 ]

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Curso,Turma, Frequencia, Aviso, Solicitacao, SemestreAvaliativo, Aprovado, Material
+from .models import Curso,Turma, Frequencia, Aviso, Solicitacao, SemestreAvaliativo, Aprovado, Material, Documento
 from usuario.models import InformacoesPessoais
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
@@ -572,3 +572,33 @@ def excluir_listao(request, semestre_id):
         semestre = get_object_or_404(SemestreAvaliativo, id=semestre_id)
         semestre.delete()
         return redirect('instsoli:listao_aprovados')
+
+######################### Documentação ##########################################
+@login_required
+def documentacao(request):
+    documentos = Documento.objects.filter(aluno=request.user)
+
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        tipo = request.POST.get('tipo')
+        arquivo = request.FILES.get('arquivo')
+
+        if nome and tipo and arquivo:
+            Documento.objects.create(
+                aluno=request.user,
+                nome=nome,
+                tipo=tipo,
+                arquivo=arquivo
+            )
+            return redirect('instsoli:documentacao')
+
+    
+    return render(request, 'instsoli/pages/documentacao/documentacao.html', context = {
+        'documentos': documentos
+    })
+
+def deletar_documento(request, id):
+    documento = get_object_or_404(Documento, id=id, aluno=request.user)
+    documento.arquivo.delete()  
+    documento.delete()
+    return redirect('instsoli:documentacao')

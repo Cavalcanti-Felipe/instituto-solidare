@@ -144,3 +144,20 @@ class Material(models.Model):
 
     def __str__(self):
         return f'{self.nome} - {self.curso}'
+    
+TIPO_ARQUIVO_CHOICES = [
+    ('PDF', 'PDF'),
+    ('JPG', 'Imagem JPG'),
+    ('PNG', 'Imagem PNG'),
+    ('DOCX', 'Documento DOCX'),
+]
+
+class Documento(models.Model):
+    aluno = models.ForeignKey(User, on_delete=models.CASCADE, related_name='documentos')
+    nome = models.CharField(max_length=150)
+    arquivo = models.FileField(upload_to='documentos/')
+    tipo = models.CharField(max_length=10, choices=TIPO_ARQUIVO_CHOICES)
+    data_envio = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.nome} ({self.tipo})"

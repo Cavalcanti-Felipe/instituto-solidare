@@ -1,0 +1,269 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloom | Documentação</title>
+    <link rel="stylesheet" href="{% static 'instsoli/css/style.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<style>
+    .container {
+        padding: 2rem;
+    }
+
+    .page-title {
+        text-align: center;
+        color: #2e5d34;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .document-tools {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+
+    .search-filter input {
+        padding: 0.4rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+    }
+
+    .filter-btn {
+        background-color: #f0f0f0;
+        border: none;
+        padding: 0.4rem 0.8rem;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .show-items input {
+        width: 40px;
+        padding: 0.3rem;
+    }
+
+    .table-container {
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    thead th {
+        text-align: left;
+        border-bottom: 2px solid black;
+        padding: 0.5rem;
+    }
+
+    tbody td {
+        padding: 0.5rem;
+        border-bottom: 1px solid #eee;
+    }
+    .pagination {
+        margin: 1rem 0;
+        display: flex;
+        justify-content: center;
+        gap: 0.4rem;
+    }
+
+    .pagination button {
+        background: #f0f0f0;
+        border: none;
+        padding: 0.5rem 0.8rem;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .pagination button.active {
+        background-color: #2e5d34;
+        color: white;
+    }
+
+    .download-btn-container {
+        text-align: left;
+        margin-top: 30px;
+    }
+
+    .download-btn {
+        background-color: #2e5d34;
+        color: white;
+        border: none;
+        padding: 0.7rem 1.5rem;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+    
+    .delete-btn {
+        background-color:rgb(201, 9, 5);
+        color: white;
+        border: none;
+        padding: 0.7rem 1.5rem;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 999;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+        background-color: #fff;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 400px;
+        border-radius: 10px;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close:hover {
+        color: black;
+    }
+
+    .modal form input, .modal form select {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 8px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
+
+    .modal form button {
+        width: 100%;
+        background-color: #2e5d34;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .modal form button:hover {
+        background-color: #254c2b;
+    }
+</style>
+<body>
+    {% include "instsoli/partials/sidebar.html" %}
+
+    <main class="container">
+        <h1 class="page-title">Documentação do Aluno</h1>
+
+        <div class="document-tools">
+            <div class="search-filter">
+                <input type="text" placeholder="Busca" id="searchInput">
+                <button class="filter-btn"><i class='bx bx-filter'></i> Filtro</button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Arquivo</th>
+                        <th>Tipo</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="documentTable">
+                    {% for doc in documentos %}
+                    <tr>
+                        <td><a href="{{ doc.arquivo.url }}" target="_blank">{{ doc.nome }}</a></td>
+                        <td>{{ doc.tipo }}</td>
+                        <td>{{ doc.data_envio|date:"d/m/Y" }}</td>
+                        <td>
+                            <a href="{{ doc.arquivo.url }}" download>
+                                <button class="download-btn"><i class='bx bxs-download'></i></button>
+                            </a>
+                            <a href="{% url 'instsoli:deletar_documento' doc.id %}" onclick="return confirm('Tem certeza que deseja deletar este documento?');">
+                                <button class="delete-btn"><i class='bx bxs-trash'></i></button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4">Nenhum documento encontrado.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Botão para abrir o modal -->
+        <div class="download-btn-container">
+            <button class="download-btn" id="openModalBtn">
+                <i class='bx bx-upload'></i> Anexar Documento
+            </button>
+        </div>
+
+        <!-- Modal -->
+        <div id="uploadModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeModal">&times;</span>
+                <h2>Enviar Documento</h2>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label>Nome do Documento</label>
+                    <input type="text" name="nome" required placeholder="Ex.: Histórico, Matrícula">
+
+                    <label>Tipo do Arquivo</label>
+                    <select name="tipo" required>
+                        <option value="PDF">PDF</option>
+                        <option value="JPG">Imagem JPG</option>
+                        <option value="PNG">Imagem PNG</option>
+                        <option value="DOCX">Documento DOCX</option>
+                    </select>
+
+                    <label>Arquivo</label>
+                    <input type="file" name="arquivo">
+
+                    <button type="submit"><i class='bx bx-upload'></i> Enviar</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="{% static 'instsoli/js/scripts.js' %}"></script>
+    <script>
+        const modal = document.getElementById("uploadModal");
+        const openModalBtn = document.getElementById("openModalBtn");
+        const closeModal = document.getElementById("closeModal");
+
+        openModalBtn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        closeModal.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

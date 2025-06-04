@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Curso, Frequencia, Turma, Solicitacao, SemestreAvaliativo, Aprovado, Material
+from .models import Curso, Frequencia, Turma, Solicitacao, SemestreAvaliativo, Aprovado, Material, Documento
 # Register your models here.
 @admin.register(Curso)
 class CursoAdmin(admin.ModelAdmin):
@@ -27,4 +27,8 @@ class AprovadoAdmin(admin.ModelAdmin):
 
 @admin.register(Material)
 class MaterialAdmin(admin.ModelAdmin):
+    ...
+
+@admin.register(Documento)
+class DocumentoAdmin(admin.ModelAdmin):
     ...
