@@ -43,7 +43,7 @@ body {
     "navbar navbar"
     "sidebar main"
     "sidebar footer";
-    color: var(--cor-cinza-escuro);
+    color: #426445;
     background-color: #F2EEDD;
 }
 
@@ -77,7 +77,7 @@ nav.navbar {
 aside {
     grid-area: sidebar;
     background-color: #F2EEDD;
-    color: var(--cor-cinza-escuro);
+    color: #426445;
     padding-top: 1rem;
     height: 100vh;
     position: sticky;
@@ -322,7 +322,7 @@ form input[type="file"]:focus {
 }
 
 .btn-criar-curso {
-    background-color: var(--cor-cinza-escuro);
+    background-color: #426445;
     color: #ffffff;
     padding: 5px 9px;
     border: none;
@@ -337,7 +337,7 @@ form input[type="file"]:focus {
 }
 
 .btn-criar-curso:hover {
-    background-color: var(--cor-cinza-claro);
+    background-color: 74c47b;
 }
 
 /* Detalhes cursos */
@@ -366,7 +366,7 @@ form input[type="file"]:focus {
 .curso-item h3 {
     margin: 0;
     font-size: 18px;
-    color: var(--cor-cinza-escuro);
+    color: #426445;
 }
 
 .curso-acoes {
@@ -376,12 +376,12 @@ form input[type="file"]:focus {
 
 .curso-acoes a {
     font-size: 20px;
-    color: var(--cor-cinza-escuro);
+    color: #426445;
     transition: color 0.3s, transform 0.2s;
 }
 
 .curso-acoes a:hover {
-    color: var(--cor-cinza-claro);
+    color: #74c47b;
     transform: scale(1.1);
 }
 
@@ -410,7 +410,7 @@ form input[type="file"]:focus {
 
 .card .icon {
     font-size: 2.5rem;
-    color: var(--cor-cinza-escuro);
+    color: #426445;
     margin-bottom: 10px;
 }
 
@@ -421,13 +421,13 @@ form input[type="file"]:focus {
 
 .card p {
     font-size: 0.9rem;
-    color: #555;
+    color: #426445;
     margin-bottom: 15px;
 }
 
 .card a {
     text-decoration: none;
-    background-color: var(--cor-cinza-escuro);
+    background-color: #426445;
     color: white;
     padding: 8px 15px;
     border-radius: 8px;
@@ -452,7 +452,7 @@ form input[type="file"]:focus {
 .gerenciar_turmas-card h3 {
     font-size: 1.3rem;
     margin-bottom: 10px;
-    color: #2b2b2b;
+    color: #426445;
 }
 
 .gerenciar_turmas-card p {
@@ -469,7 +469,7 @@ form input[type="file"]:focus {
 }
 
 .gerenciar_turmas-card .turma-actions a {
-    background-color: var(--cor-cinza-escuro);
+    background-color: #426445;
     color: white;
     padding: 6px 12px;
     border-radius: 6px;
@@ -479,7 +479,7 @@ form input[type="file"]:focus {
 }
 
 .gerenciar_turmas-card .turma-actions a:hover {
-    background-color: var(--cor-cinza-claro);
+    background-color: #7bcb81;
 }
 
 .gerenciar_turmas-card {
@@ -508,7 +508,7 @@ form input[type="file"]:focus {
 
 /* Criar turmas */
 .btn-criar-turma {
-    background-color: var(--cor-cinza-escuro);
+    background-color: #74c47b;
     color: white;
     padding: 10px 16px;
     border-radius: 8px;
@@ -519,11 +519,11 @@ form input[type="file"]:focus {
 }
 
 .btn-criar-turma:hover {
-    background-color: #646464;
+    background-color: #7ad281;
 }
 
 .container-criar_turma {
-    background-color: #e3e3e3;
+    background-color: #b5ae8e;
     border-radius: 10px;
     padding: 2rem 3rem;
     width: 50%;
@@ -532,7 +532,7 @@ form input[type="file"]:focus {
 
 .container-criar_turma h2 {
     font-size: 1.8rem;
-    color: var(--cor-cinza-escuro);
+    color: #426445;
     font-weight: 600;
     margin-bottom: 1.5rem;
     text-align: center;
@@ -542,7 +542,7 @@ form input[type="file"]:focus {
     font-weight: 500;
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--cor-cinza-escuro);
+    color: #426445;
 }
 
 .container-criar_turma input[type="text"],
@@ -558,7 +558,7 @@ form input[type="file"]:focus {
 }
 
 .botao_criar-turma {
-    background-color: var(--cor-cinza-escuro);
+    background-color: #426445;
     color: var(--cor-branco);
     border: none;
     padding: 12px 20px;
@@ -571,7 +571,7 @@ form input[type="file"]:focus {
 }
 
 .botao_criar-turma:hover {
-    background-color: var(--cor-cinza-claro);
+    background-color: 74c47b;
 }
 
 /* Ver alunos */
@@ -597,7 +597,7 @@ form input[type="file"]:focus {
 }
 
 .tabela-alunos thead {
-    background-color: var(--cor-cinza-escuro);
+    background-color: #426445;
     color: white;
 }
 
@@ -639,7 +639,7 @@ form input[type="file"]:focus {
 }
 
 .container-frequencia button {
-    background-color: var(--cor-cinza-escuro);
+    background-color: #426445;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -651,7 +651,7 @@ form input[type="file"]:focus {
 }
 
 .container-frequencia button:hover {
-    background-color: var(--cor-cinza-claro);
+    background-color: 74c47b;
 }
 
 .container-frequencia table {
@@ -663,7 +663,7 @@ form input[type="file"]:focus {
 .container-frequencia input[type="checkbox"] {
     width: 18px;
     height: 18px;
-    accent-color: var(--cor-cinza-escuro);
+    accent-color: #426445;
 }
 
 .container-frequencia table {
@@ -681,7 +681,7 @@ form input[type="file"]:focus {
 }
 
 .container-frequencia th {
-    background-color: var(--cor-cinza-escuro);
+    background-color: #426445;
     color: white;
     font-weight: 400;
 }
@@ -783,7 +783,7 @@ form input[type="file"]:focus {
 }
 
 .aviso-box p {
-    color: var(--cor-cinza-escuro);
+    color: #426445;
     margin-bottom: 1.5rem;
     line-height: 1.6;
     flex-grow: 1;
@@ -812,7 +812,7 @@ form input[type="file"]:focus {
 
 .card-data {
     font-size: 0.85rem;
-    color: var(--cor-cinza-claro);
+    color: 74c47b;
     margin-top: auto;
 }
 
@@ -825,7 +825,7 @@ form input[type="file"]:focus {
 }
 
 .editar-btn, .bx-x {
-    color: var(--cor-cinza-claro);
+    color: 74c47b;
     font-size: 1.25rem;
     transition: color 0.3s ease, transform 0.2s ease;
     cursor: pointer;
@@ -844,7 +844,7 @@ form input[type="file"]:focus {
 .sem-avisos {
     grid-column: 1 / -1;
     text-align: center;
-    color: var(--cor-cinza-claro);
+    color: 74c47b;
     padding: 2rem;
 }
 
@@ -883,7 +883,7 @@ form input[type="file"]:focus {
 }
 
 .fechar-modal {
-    color: var(--cor-cinza-claro);
+    color: 74c47b;
     font-size: 2rem;
     font-weight: bold;
     cursor: pointer;
@@ -891,7 +891,7 @@ form input[type="file"]:focus {
 }
 
 .fechar-modal:hover {
-    color: var(--cor-cinza-escuro);
+    color: #426445;
 }
 
 .input-group {
@@ -901,7 +901,7 @@ form input[type="file"]:focus {
 .input-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--cor-cinza-escuro);
+    color: #426445;
     font-weight: 500;
 }
 

@@ -86,7 +86,7 @@ aside img {
 }
 
 .sidebar-link:hover .sidebar-title {
-    color: #557659;
+    color: #72d67e;
 }
 
 /********************* Main ***********************/
@@ -122,7 +122,7 @@ main {
 .wrapper-2 h1 {
     font-size: 32px;
     text-align: center;
-    color: var(--cor-cinza-escuro);
+    color: #426445;
     margin-bottom: 20px;
 }
 
@@ -145,10 +145,10 @@ main {
     width: 100%;
     height: 100%;
     background: var(--cor-branco);
-    border: 2px solid var(--cor-cinza-escuro);
+    border: 2px solid #426445;
     outline: none;
     font-size: 16px;
-    color: var(--cor-cinza-escuro);
+    color: #426445;
     border-radius: 6px;
     padding: 15px 15px 15px 40px;
 }
@@ -157,7 +157,7 @@ main {
     width: 100%;
     height: 100%;
     background: var(--cor-branco);
-    border: 2px solid var(--cor-cinza-escuro);
+    border: 2px solid #426445;
     outline: none;
     font-size: 16px;
     color: var(--cor-cinza-escuro);
@@ -177,14 +177,14 @@ main {
     top: 50%;
     transform: translateY(-50%);
     font-size: 20px;
-    color: var(--cor-cinza-escuro);
+    color: #426445;
 }
 
 .btn-2 {
     width: 100%;
     max-width: 300px;
     height: 45px;
-    background: var(--cor-cinza-escuro);
+    background: #426445;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -196,18 +196,18 @@ main {
 }
 
 .btn-2:hover {
-    background-color: var(--cor-cinza-claro);
+    background-color: #426445;
 }
 
 .wrapper-2 p {
     text-align: center;
     margin-top: 20px;
     font-size: 14px;
-    color: var(--cor-cinza-escuro);
+    color: #426445;
 }
 
 .wrapper-2 p a {
-    color: var(--cor-cinza-escuro);
+    color: #426445;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
@@ -226,10 +226,10 @@ main {
     width: 100%;
     height: 50px;
     background: var(--cor-branco);
-    border: 2px solid var(--cor-cinza-escuro);
+    border: 2px solid #426445;
     outline: none;
     font-size: 16px;
-    color: var(--cor-cinza-escuro);
+    color: #426445;
     border-radius: 6px;
     padding: 15px 15px 15px 15px;
     appearance: none;
@@ -261,13 +261,13 @@ main {
 .step {
     width: 12px;
     height: 12px;
-    background-color: var(--cor-cinza-claro);
+    background-color: #7fdb87;
     border-radius: 50%;
     transition: background-color 0.3s ease;
 }
 
 .step.active {
-    background-color: var(--cor-azul-medio);
+    background-color: #426445;
 }
 
 
@@ -282,13 +282,13 @@ main {
     background: transparent;
     border: none;
     font-size: 30px;
-    color: var(--cor-azul-medio);
+    color: #426445;
     cursor: pointer;
     transition: color 0.3s ease;
 }
 
 .prev-btn:hover, .next-btn:hover {
-    color: var(--cor-azul-claro);
+    color: #73c479;
 }
 
 /* Estilo para as bolinhas de navegação */
@@ -300,13 +300,13 @@ main {
 .step {
     width: 10px;
     height: 10px;
-    background-color: var(--cor-cinza-claro);
+    background-color: #79c47f;
     border-radius: 50%;
     transition: background-color 0.3s ease;
 }
 
 .step.active {
-    background-color: var(--cor-azul-medio);
+    background-color: #426445;
 }
 
 /**************** Messages Colors *****************/
