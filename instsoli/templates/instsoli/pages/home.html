@@ -8,279 +8,68 @@
     <title>Bloom   | Transformando Vidas</title>
     <link rel="stylesheet" href="{% static 'instsoli/css/style.css' %}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <style>
-        /* Estilos específicos para a home */
-        .hero {
-            background: linear-gradient( rgba(41, 98, 6, 0.8),rgba(242, 238, 221, 0.8)), url('{% static "instsoli/images/hero-bg.jpg" %}');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 6rem 2rem;
-            margin-bottom: 3rem;
+</head>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
         }
-        
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-        }
-        
-        .btn-primary {
-            background-color: var(--cor-branco);
-            color: rgba(41, 98, 6, 0.8);
-            padding: 0.8rem 2rem;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            background-color: rgba(41, 98, 6, 0.8);
-            color: var(--cor-branco);
-            transform: translateY(-3px);
-        }
-        
-        .section {
-            padding: 4rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: rgba(41, 98, 6, 0.8);
-        }
-        
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+
+        main {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            background-color: 
         }
-        
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .about-img img {
+
+        .img-bloom img {
+            max-width: 500px;
             width: 100%;
             height: auto;
-            display: block;
         }
-        
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .project-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            color: rgba(41, 98, 6, 0.8);
-        }
-        
-        .project-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .project-img {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .project-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .project-card:hover .project-img img {
-            transform: scale(1.1);
-        }
-        
-        .project-content {
-            padding: 1.5rem;
-        }
-        
-        .stats {
+
+        main a {
+            margin-top: 30px;
+            padding: 12px 28px;
             background-color: rgba(41, 98, 6, 0.8);
+            width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             color: white;
-            padding: 4rem 2rem;
-            text-align: center;
+            text-decoration: none;
+            border-radius: 8px; 
+            font-weight: 600;
+            font-size: 18px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background-color 0.3s, transform 0.2s;
         }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .stat-item h3 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-            color: rgba(41, 98, 6, 0.8);
-        }
-        
-        .contact-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            color: rgba(41, 98, 6, 0.8);
-        }
-        
-        .contact-card i {
-            font-size: 2.5rem;
-            color: rgba(41, 98, 6, 0.8);
-            margin-bottom: 1rem;
-        }
-        
-        @media (max-width: 768px) {
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero h1 {
-                font-size: 2.2rem;
-            }
+
+        main a:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
         }
     </style>
-</head>
 <body>    
     {% include "instsoli/partials/sidebar.html" %}
 
     <main>
-        <!-- Seção Hero -->
-        <section class="hero">
-            <h1>Transformando Vidas Através da Educação</h1>
-            <p>O Bloom tem como missão promover o desenvolvimento social através de projetos educacionais e de capacitação profissional.</p>
-            <a href="#contato" class="btn-primary">Quero Ajudar</a>
-        </section>
-        
-        <!-- Sobre Nós -->
-        <section class="section">
-            <h2 class="section-title">Sobre o Instituto Solidare</h2>
-            <div class="about-grid">
-                <div class="about-content">
-                    <p>Fundado em 2010, o Bloomé uma organização sem fins lucrativos que atua na promoção da educação e inclusão social em comunidades carentes.</p>
-                    <p>Nossa visão é criar um mundo onde todas as pessoas tenham acesso à educação de qualidade e oportunidades para desenvolver seu potencial.</p>
-                    <p>Atuamos através de projetos educacionais, capacitação profissional e desenvolvimento comunitário, impactando diretamente a vida de milhares de pessoas.</p>
-                </div>
-                <div class="about-img">
-                    <img src="{% static 'instsoli/images/criancas.jpg' %}" alt="Equipe do Instituto Solidare">
-                </div>
-            </div>
-        </section>
-        
-        <!-- Nossos Números -->
-        <section class="stats">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h3>5.000+</h3>
-                    <p>Pessoas Impactadas</p>
-                </div>
-                <div class="stat-item">
-                    <h3>12</h3>
-                    <p>Projetos Ativos</p>
-                </div>
-                <div class="stat-item">
-                    <h3>50+</h3>
-                    <p>Voluntários</p>
-                </div>
-                <div class="stat-item">
-                    <h3>10</h3>
-                    <p>Comunidades Atendidas</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Nossos Projetos -->
-        <section class="section">
-            <h2 class="section-title">Nossos Projetos</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-img">
-                        <img src="{% static 'instsoli/images/image.png' %}" alt="Educação Infantil">
-                    </div>
-                    <div class="project-content">
-                        <h3>Educação Infantil</h3>
-                        <p>Projeto que oferece reforço escolar e atividades lúdicas para crianças de 6 a 12 anos.</p>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-img">
-                        <img src="{% static 'instsoli/images/prog.jpg' %}" alt="Capacitação Profissional">
-                    </div>
-                    <div class="project-content">
-                        <h3>Capacitação Profissional</h3>
-                        <p>Cursos gratuitos de qualificação para jovens e adultos em situação de vulnerabilidade.</p>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-img">
-                        <img src="{% static 'instsoli/images/alim-soli.jpg' %}" alt="Alimentação Solidária">
-                    </div>
-                    <div class="project-content">
-                        <h3>Alimentação Solidária</h3>
-                        <p>Distribuição de cestas básicas e refeições para famílias em situação de insegurança alimentar.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Contato -->
-        <section id="contato" class="section">
-            <h2 class="section-title">Entre em Contato</h2>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">Quer saber mais sobre nosso trabalho ou como ajudar? Entre em contato conosco!</p>
+        <div class="img-bloom">
+            <img src="{% static 'instsoli/images/BLOOM SL.png' %}" alt="bloom logo">
+        </div>
+        {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+                <a href="{% url "instsoli:portal_professor" %}">Acessar</a>
+            {% else %}
+                <a href="{% url "instsoli:portal_aluno" %}">Acessar</a>
+            {% endif %}
+        {% else %}
+            <a href="{% url 'usuario:login' %}">Acessar</a>
+        {% endif %}
             
-            <div class="contact-info">
-                <div class="contact-card">
-                    <i class='bx bx-envelope'></i>
-                    <h3>Instagram</h3>
-                    <p>@institutosolidare</p>
-                </div>
-                
-                <div class="contact-card">
-                    <i class='bx bx-phone'></i>
-                    <h3>Telefone</h3>
-                    <p>(81) 3251-4480</p>
-                </div>
-                
-                <div class="contact-card">
-                    <i class='bx bx-map'></i>
-                    <h3>Endereço</h3>
-                    <p>R. Alcântara, 170 - Coqueiral, Recife - PE</p>
-                </div>
-            </div>
-        </section>
+
     </main>
 
     <script src="{% static 'instsoli/js/scripts.js' %}"></script>

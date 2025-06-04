@@ -151,7 +151,10 @@ def login_view(request):
 
     if user:
         login(request, user)
-        return redirect('instsoli:home')
+        if user.is_superuser:
+            return redirect('instsoli:portal_professor')
+        else:
+            return redirect('instsoli:portal_aluno')
     else:
         messages.error(request, 'Dados inválidos.')
         return redirect('usuario:login')
