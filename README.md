@@ -58,3 +58,37 @@ Bem-vindo ao repositório do projeto feito por alunos no 2º período da CESAR S
   ![bucktracker](https://github.com/user-attachments/assets/bc61c645-5877-4ee8-9d73-ded482888d91)
 </details>
 <br>
+
+<details>
+<summary><h1>SR2</h1></summary> 
+  <p style="text-align: center; text-decoration: none;">
+    <a href="#" 
+    style="text-decoration: none;">
+      <span>Diagrama de atividades</span>
+    </a>
+  </p>
+
+  <p style="text-align: center; text-decoration: none;">
+    <a href="#" style="text-decoration: none;">
+      <span>Relatório Programação em Par</span>
+    </a>
+  </p>
+  
+  <p style="text-align: center; text-decoration: none;">
+    <a href="https://docs.google.com/document/d/118fDORp-AMhUfvoctiRDJJBUXZchASk9owDDJVZj6Sw/edit?usp=drivesdk" style="text-decoration: none;">
+      <span>Histórias de usuário</span>
+    </a>
+  </p>
+
+  ## Screencast Deploy
+
+  ## Screencast Testes Automatizados
+
+  ## Screencast CI/CD
+  
+  ## Screencast do Protótipo de Baixa Fidelidade
+  
+  ## Issue/Bugtracker
+
+</details>
+<br>
