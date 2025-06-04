@@ -76,15 +76,38 @@ describe('aba de aviso', () => {
         cy.get('#titulo').type('Aviso teste');
         cy.get('#mensagem').type('Esse aviso é um teste');
         cy.get('#prioridade').select('Importante');
-        cy.get('form > button').click();
+        cy.get('#avisoModal > .modal-content > form > button').click();
     });
 
     it('editar aviso', () => {
+        cy.createSuperUser('usuarioteste', 'usuarioteste@gmail.com', '123', '123', 'Gestor',      'instituto-solidare');
+        cy.login('usuarioteste', '123');
+        cy.get('[href="/portal_professor/"]').click();
+        cy.get(':nth-child(4) > a').click();
+        cy.get('#openModal').click();
+        cy.get('#titulo').type('Aviso teste');
+        cy.get('#mensagem').type('Esse aviso é um teste');
+        cy.get('#prioridade').select('Importante');
+        cy.get('#avisoModal > .modal-content > form > button').click();
+        cy.get('.editBtn > .bx').click();
+        cy.get('#editTitulo').clear().type('Editando aviso teste');
+        cy.get('#editMensagem').clear().type('Editando a mensagem de aviso teste');
+        cy.get('#editPrioridade').select('Normal');
+        cy.get('#editForm > button').click();
         
     });
 
     it('deletar aviso', () => {
-        
+        cy.createSuperUser('usuarioteste', 'usuarioteste@gmail.com', '123', '123', 'Gestor',      'instituto-solidare');
+        cy.login('usuarioteste', '123');
+        cy.get('[href="/portal_professor/"]').click();
+        cy.get(':nth-child(4) > a').click();
+        cy.get('#openModal').click();
+        cy.get('#titulo').type('Aviso teste');
+        cy.get('#mensagem').type('Esse aviso é um teste');
+        cy.get('#prioridade').select('Importante');
+        cy.get('#avisoModal > .modal-content > form > button').click();
+        cy.get('.bx-trash').click();
     });
     
     afterEach(() => {
