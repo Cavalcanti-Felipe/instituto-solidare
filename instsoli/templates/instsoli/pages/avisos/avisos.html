@@ -368,7 +368,7 @@
             <div class="aviso-item">
                 <div class="aviso-content">
                     <span class="autor">
-                        {% if user.is_superuser or aviso.professor == user %}
+                        {% if user.is_superuser and aviso.professor == user %}
                             <a href="{% url 'instsoli:excluir_aviso' aviso.id %}" onclick="return confirm('Tem certeza que deseja excluir este aviso?');"><i class='bx bx-trash'></i></a>
                             <a href="#" class="editBtn" data-id="{{ aviso.id }}" data-titulo="{{ aviso.titulo }}" data-mensagem="{{ aviso.mensagem }}" data-prioridade="{{ aviso.prioridade }}"><i class='bx bx-pencil'></i></a>
                         {% endif %}
