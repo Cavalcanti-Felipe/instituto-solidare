@@ -113,6 +113,24 @@ describe('', () => {
 
     });
 
+it('chamada', () => {
+        cy.createSuperUser('usuarioteste', 'usuarioteste@gmail.com', '123', '123', 'Gestor',      'instituto-solidare');
+        cy.login('usuarioteste', '123');
+        cy.get('[href="/portal_professor/"]').click();
+        cy.get('section > :nth-child(1) > a').click();
+        cy.get('.btn-criar-turma').click();
+        cy.get('#nome').type('Turma teste');
+        cy.get('#curso').select('Iniciação a Programação');
+        cy.get('#data_inicio').type('2025-05-17');
+        cy.get('#data_fim').type('2029-05-17');
+        cy.get('.select2-search').type('Rafael Ferraz');
+        cy.get('.select2-results__option').contains('Rafael Ferraz').click();
+        cy.get('.botao_criar-turma').click();
+        
+        cy.contains('a', 'Frequência').click();
+        cy.get('.btn-salvar').click();
+    });
+
      it('editar turma', () => {
        cy.createSuperUser('usuarioteste', 'usuarioteste@gmail.com', '123', '123', 'Gestor',      'instituto-solidare');
         cy.login('usuarioteste', '123');
@@ -132,15 +150,8 @@ describe('', () => {
         cy.get('#data_inicio').clear().type('2022-10-17');
         cy.get('#data_fim').clear().type('2026-10-17');
         cy.get('.botao_criar-turma').click();
-        
-
     });
-    
-
-
-
-
-
+   
     afterEach(() => {
         cy.deleteAllUsers();
         cy.deleteAllInformacoes();
