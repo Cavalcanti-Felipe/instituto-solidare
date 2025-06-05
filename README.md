@@ -86,7 +86,7 @@ Bem-vindo ao repositório do projeto feito por alunos no 2º período da CESAR S
     <img src="https://img.shields.io/badge/Deploy-FF0000?style=for-the-badge&logo=youtube&logoColor=white" />
   </a>
 
-  <a href="#">
+  <a href="https://youtu.be/OUho9C38K5Y">
     <img src="https://img.shields.io/badge/Protótipo-555C5B?style=for-the-badge&logo=figma&logoColor=white" />
   </a>
   
