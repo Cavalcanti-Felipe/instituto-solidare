@@ -1,5 +1,3 @@
-
-https://github.com/user-attachments/assets/69c01948-ff0d-4de4-a5d2-e8362068abd3
 # Instituto Solidare
 
 Bem-vindo ao repositório do projeto feito por alunos no 2º período da CESAR School na Disciplina de Projetos
@@ -98,8 +96,10 @@ Bem-vindo ao repositório do projeto feito por alunos no 2º período da CESAR S
   <a href="#">
     <img src="https://img.shields.io/badge/CI/CD-000000?style=for-the-badge&logo=gnu-bash&logoColor=white" />
   </a>
-
 </p>
+
+## Issue/Bugtracker
+
   
 </details>
 <br>
