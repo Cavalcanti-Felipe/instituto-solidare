@@ -100,7 +100,7 @@ Bem-vindo ao repositório do projeto feito por alunos no 2º período da CESAR S
 </p>
 
 ## Issue/Bugtracker
-
+![bugtracker](https://github.com/user-attachments/assets/253f2084-baca-4bb4-b115-653905cc9185)
   
 </details>
 <br>
