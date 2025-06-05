@@ -5,7 +5,7 @@ Bem-vindo ao repositório do projeto feito por alunos no 2º período da CESAR S
 
 ## Links
   <p style="text-align: center; text-decoration: none;">
-    <a href="https://www.figma.com/design/V0WbTg4ZciPOLMuifcNVDr/Prot%C3%B3tipo--Copy-?node-id=0-1&t=k43LuYfNcD9fceEe-1 " style="text-decoration: none;">
+    <a href="https://www.figma.com/design/KdT1t9RpwEwTIFdaeZfCVv/m%C3%A9dia-fidelidade--SR2-?node-id=0-1&t=ASzhT6qUGiNe1SiH-0" style="text-decoration: none;">
       <span>Figma</span>
     </a>
   </p>
