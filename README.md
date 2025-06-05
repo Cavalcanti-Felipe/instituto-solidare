@@ -1,3 +1,5 @@
+
+https://github.com/user-attachments/assets/69c01948-ff0d-4de4-a5d2-e8362068abd3
 # Instituto Solidare
 
 Bem-vindo ao repositório do projeto feito por alunos no 2º período da CESAR School na Disciplina de Projetos
@@ -80,15 +82,21 @@ Bem-vindo ao repositório do projeto feito por alunos no 2º período da CESAR S
     </a>
   </p>
 
-  ## Screencast Deploy
-
+  ## Screencast Deploy 
+  <a href="https://youtu.be/2fK3jZsZv-Y" style="text-decoration: none;">
+      <span>DEPLOY</span>
+  </a>
   ## Screencast Testes Automatizados
-
+  <a href="https://youtu.be/VXYqdj3mGbw" style="text-decoration: none;">
+      <span>TESTES AUTOMATIZADOS</span>
+  </a>
   ## Screencast CI/CD
   
-  ## Screencast do Protótipo de Baixa Fidelidade
-  
+  ## Screencast do Protótipo
+  <a href="https://youtu.be/VXYqdj3mGbw" style="text-decoration: none;">
+      <span>PROTÓTIPO</span>
+  </a>
   ## Issue/Bugtracker
-
+  
 </details>
 <br>
