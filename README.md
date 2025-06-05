@@ -67,7 +67,7 @@ Bem-vindo ao repositório do projeto feito por alunos no 2º período da CESAR S
     <img src="https://img.shields.io/badge/Azure-0089D6?style=for-the-badge&logo=microsoft-azure&logoColor=white" />
   </a>
   
-  <a href="#">
+  <a href="https://docs.google.com/document/d/1dDLGIUTO0JjhBM0MEkPi2VQC7cnx2jSQo9t2jBP55z8/edit?tab=t.0">
     <img src="https://img.shields.io/badge/Programação em Par-blue?style=for-the-badge&logo=google-docs&logoColor=white" />
   </a>
 
@@ -75,7 +75,7 @@ Bem-vindo ao repositório do projeto feito por alunos no 2º período da CESAR S
     <img src="https://img.shields.io/badge/Histórias-blue?style=for-the-badge&logo=google-docs&logoColor=white" />
   </a>
   
-  <a href="#">
+  <a href="https://miro.com/app/board/uXjVI_qNn9w=/?focusWidget=3458764625530722858">
     <img src="https://img.shields.io/badge/Diagrama de Atividades-black?style=for-the-badge&logo=miro&logoColor=yellow" />
   </a>
 </p>
