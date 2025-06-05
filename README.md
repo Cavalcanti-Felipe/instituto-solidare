@@ -63,40 +63,43 @@ Bem-vindo ao repositório do projeto feito por alunos no 2º período da CESAR S
 
 <details>
 <summary><h1>SR2</h1></summary> 
-  <p style="text-align: center; text-decoration: none;">
-    <a href="#" 
-    style="text-decoration: none;">
-      <span>Diagrama de atividades</span>
-    </a>
-  </p>
-
-  <p style="text-align: center; text-decoration: none;">
-    <a href="#" style="text-decoration: none;">
-      <span>Relatório Programação em Par</span>
-    </a>
-  </p>
+<p align="center">
+    
+  <a href="https://projetobloom-eug9arcadbdxbfhc.brazilsouth-01.azurewebsites.net/">
+    <img src="https://img.shields.io/badge/Azure-0089D6?style=for-the-badge&logo=microsoft-azure&logoColor=white" />
+  </a>
   
-  <p style="text-align: center; text-decoration: none;">
-    <a href="https://docs.google.com/document/d/118fDORp-AMhUfvoctiRDJJBUXZchASk9owDDJVZj6Sw/edit?usp=drivesdk" style="text-decoration: none;">
-      <span>Histórias de usuário</span>
-    </a>
-  </p>
+  <a href="#">
+    <img src="https://img.shields.io/badge/Programação em Par-blue?style=for-the-badge&logo=google-docs&logoColor=white" />
+  </a>
 
-  ## Screencast Deploy 
-  <a href="https://youtu.be/2fK3jZsZv-Y" style="text-decoration: none;">
-      <span>DEPLOY</span>
+  <a href="https://docs.google.com/document/d/118fDORp-AMhUfvoctiRDJJBUXZchASk9owDDJVZj6Sw/edit?usp=drivesdk">
+    <img src="https://img.shields.io/badge/Histórias-blue?style=for-the-badge&logo=google-docs&logoColor=white" />
   </a>
-  ## Screencast Testes Automatizados
-  <a href="https://youtu.be/VXYqdj3mGbw" style="text-decoration: none;">
-      <span>TESTES AUTOMATIZADOS</span>
-  </a>
-  ## Screencast CI/CD
   
-  ## Screencast do Protótipo
-  <a href="https://youtu.be/VXYqdj3mGbw" style="text-decoration: none;">
-      <span>PROTÓTIPO</span>
+  <a href="#">
+    <img src="https://img.shields.io/badge/Diagrama de Atividades-black?style=for-the-badge&logo=miro&logoColor=yellow" />
   </a>
-  ## Issue/Bugtracker
+</p>
+
+<p align="center">
+  <a href="https://youtu.be/2fK3jZsZv-Y">
+    <img src="https://img.shields.io/badge/Deploy-FF0000?style=for-the-badge&logo=youtube&logoColor=white" />
+  </a>
+
+  <a href="#">
+    <img src="https://img.shields.io/badge/Protótipo-555C5B?style=for-the-badge&logo=figma&logoColor=white" />
+  </a>
+  
+  <a href="https://youtu.be/VXYqdj3mGbw">
+    <img src="https://img.shields.io/badge/Cypress-00800?style=for-the-badge&logo=cypress&logoColor=white" />
+  </a>
+
+  <a href="#">
+    <img src="https://img.shields.io/badge/CI/CD-000000?style=for-the-badge&logo=gnu-bash&logoColor=white" />
+  </a>
+
+</p>
   
 </details>
 <br>
