@@ -94,7 +94,7 @@ Bem-vindo ao repositório do projeto feito por alunos no 2º período da CESAR S
     <img src="https://img.shields.io/badge/Cypress-00800?style=for-the-badge&logo=cypress&logoColor=white" />
   </a>
 
-  <a href="#">
+  <a href="https://youtu.be/laYEkd9KInE">
     <img src="https://img.shields.io/badge/CI/CD-000000?style=for-the-badge&logo=gnu-bash&logoColor=white" />
   </a>
 </p>
